@@ -4,9 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Animated Clock - Canvas and Javascript</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
   <body>
-    <canvas id="canvas" width="500" height="500"></canvas>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 m-auto">
+          <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+      </div>
+      <div class="card px-3 pt-2">
+        <h3 class="text-uppercase py-2">Clock Styles <button class="btn btn-outline-dark btn-sm float-end text-uppercase" id="save-image"> Save image</button></h3>
+        <hr class="mb-3 mt-0">
+        <div class="row text-center">
+          <div class="col d-flex flex-column align-items-center">
+            <label for="faced" class="form-label">Faced Color</label>
+            <input type="color" class="form-control form-control-color" id="faced" value="#ecf0f1">
+          </div>
+          <div class="col d-flex flex-column align-items-center">
+            <label for="border" class="form-label">Border Color</label>
+            <input type="color" class="form-control form-control-color" id="border" value="#2c3e50">
+          </div>
+          <div class="col d-flex flex-column align-items-center">
+            <label for="number" class="form-label">Number Lines</label>
+            <input type="color" class="form-control form-control-color" id="number" value="#563d7c">
+          </div>
+          <div class="col d-flex flex-column align-items-center">
+            <label for="large_hand" class="form-label">Large Hand</label>
+            <input type="color" class="form-control form-control-color" id="large_hand" value="#800000">
+          </div>
+          <div class="col d-flex flex-column align-items-center">
+            <label for="second_hand" class="form-label">Second Hand</label>
+            <input type="color" class="form-control form-control-color" id="second_hand" value="#e74c3c">
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="./main.js"></script>
   </body>
 </html>

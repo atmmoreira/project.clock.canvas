@@ -1,6 +1,12 @@
+const canvas = document.getElementById('canvas');
+const facedColor = document.getElementById('faced');
+const borderColor = document.getElementById('border');
+const numberColor = document.getElementById('number');
+const largeHandColor = document.getElementById('large_hand');
+const secondHandColor = document.getElementById('second_hand');
+
 function clock() {
   const now = new Date();
-  const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
 
   // Setup Canvas
@@ -12,7 +18,7 @@ function clock() {
 
   // Set Default Styles
   ctx.strokeStyle = '#34495e';
-  ctx.fillStyle = '#ecf0f1';
+  ctx.fillStyle = facedColor.value;
   ctx.lineWidth = 5;
   ctx.lineCap = 'round';
 
@@ -20,7 +26,7 @@ function clock() {
   ctx.save();
   ctx.beginPath();
   ctx.lineWidth = 10;
-  ctx.strokeStyle = '#2c3e50';
+  ctx.strokeStyle = borderColor.value;
   ctx.arc(0, 0, 142, 0, Math.PI * 2, true);
   ctx.stroke();
   ctx.fill();
@@ -28,6 +34,7 @@ function clock() {
 
   // Draw Hour Lines
   ctx.save();
+  ctx.strokeStyle = numberColor.value;
   for (let i = 0; i < 12; i++) {
     ctx.beginPath();
     ctx.rotate(Math.PI / 6);
@@ -40,7 +47,7 @@ function clock() {
   // Draw Minutes Lines
   ctx.save();
   ctx.lineWidth = 4;
-  ctx.strokeStyle = '#7f8c8d';
+  ctx.strokeStyle = numberColor.value;
   for (let i = 0; i < 60; i++) {
     if (i % 5 !== 0) {
       ctx.beginPath();
@@ -57,14 +64,12 @@ function clock() {
   const min = now.getMinutes();
   const sec = now.getSeconds();
 
-  console.log(`${hr}:${min}:${sec}`);
-
   // Draw Hour Hand
   ctx.save();
   ctx.rotate(
     (Math.PI / 6) * hr + (Math.PI / 360) * min + (Math.PI / 21600) * sec
   );
-  ctx.strokeStyle = '#800000';
+  ctx.strokeStyle = largeHandColor.value;
   ctx.lineWidth = 6;
   ctx.beginPath();
   ctx.moveTo(-20, 0);
@@ -75,7 +80,7 @@ function clock() {
   // Draw Minutes Hand
   ctx.save();
   ctx.rotate((Math.PI / 30) * min + (Math.PI / 1800) * sec);
-  ctx.strokeStyle = '#800000';
+  ctx.strokeStyle = largeHandColor.value;
   ctx.lineWidth = 5;
   ctx.beginPath();
   ctx.moveTo(-28, 0);
@@ -86,8 +91,8 @@ function clock() {
   // Draw Seconds Hand
   ctx.save();
   ctx.rotate((sec * Math.PI) / 30);
-  ctx.strokeStyle = '#e74c3c';
-  ctx.fillStyle = '#e74c3c';
+  ctx.strokeStyle = secondHandColor.value;
+  ctx.fillStyle = secondHandColor.value;
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(-30, 0);
@@ -103,3 +108,11 @@ function clock() {
   requestAnimationFrame(clock);
 }
 requestAnimationFrame(clock);
+
+document.getElementById('save-image').addEventListener('click', () => {
+  const dataURL = canvas.toDataURL('image/png');
+  const link = document.createElement('a');
+  link.download = 'clock.png';
+  link.href = dataURL;
+  link.click();
+});
